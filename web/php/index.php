@@ -3,13 +3,13 @@
 <head>
   <title>PHP & MySQL Website</title>
 </head>
-<body background="../images/bg.png" style="background-repeat:no-repeat background-attachment:fixed;background-size:100% 100%; ">
+<body background="images/bg.png" style="background-repeat:no-repeat background-attachment:fixed;background-size:100% 130%;text-align:center; ">
 
 <?php require_once 'db_config.php'; ?>
 
 <?php
 
-<h2>submit</h2>
+
 // 处理表单提交的数据插入
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 连接数据库
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phonenumber = $_POST['phonenumber'];
 
     // 插入数据到数据库
-    $sql = "INSERT INTO users (name, email) VALUES ('$name', '$email','$age','$phonenumber')";
+    $sql = "INSERT INTO users (name, age, email, phonenumber) VALUES ('$name', '$age','$email','$phonenumber')";
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";
     } else {
