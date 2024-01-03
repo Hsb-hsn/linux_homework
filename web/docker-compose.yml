@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  webserver:
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./php:/var/www/html
+      - ./webserver.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./php:/var/www/html
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mywebsite
+    volumes:
+      - ./db/mysql.cnf:/etc/mysql/conf.d/custom.cnf
+      - ./db/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
+
